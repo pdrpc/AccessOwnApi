@@ -1,0 +1,57 @@
+﻿@model AccessOwnApi.Models.Address
+
+@{
+    ViewBag.Title = "RegisterNewAddress";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function redirectCep() {
+        var cep = document.getElementById("cep");
+        var access_token = localStorage.getItem('access_token');
+        var settings = {
+            "url": "https://localhost:44318/Api/Address?cep=" + cep.value,
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Authorization": "Bearer "+ access_token
+            },
+        };
+        console.log(access_token);
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+        
+    }
+
+</script>
+<h2>RegisterNewAddress</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Address</h4>
+        <br />
+        <label>Cep:
+        <br />
+            <input type="text" name="cep" id="cep" value="" size="10" maxlength="9" />
+        </label>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" placeholder="Enviar!" class="btn btn-default" onclick="redirectCep()" />
+            </div>
+        </div>
+    </div>
+    <div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

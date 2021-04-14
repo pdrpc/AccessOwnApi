@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function loginUser() {
+        var email = document.getElementById("email");
+        var password = document.getElementById("password");
+        var settings = {
+            "url": "https://localhost:44318/Token",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "data": {
+                "grant_type": "password",
+                "username": email.value,
+                "password": password.value
+            }
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response.access_token);
+            localStorage.setItem('access_token', response.access_token);
+        });
+        
+    }
+</script>
+
+<h2>Login</h2>
+
+<div class="form-horizontal">
+    <h4>Address</h4>
+    <hr />
+    <div class="form-group">
+        <label class="control-label col-md-2" for="addressId">Email: </label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="email" name="email" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="addressId">Senha: </label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="password" name="password" type="text" value="">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" class="btn btn-default" onclick="loginUser()" value="Login" />
+        </div>
+    </div>
+</div>
+

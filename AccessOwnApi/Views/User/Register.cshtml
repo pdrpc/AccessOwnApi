@@ -1,0 +1,85 @@
+﻿@model AccessOwnApi.Models.UserModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function registerUser() {
+        var email = document.getElementById("email");
+        var password = document.getElementById("password");
+        var confirmPassword = document.getElementById("confirmPassword");
+
+        var settings = {
+            "url": "https://localhost:44318/Api/Account/Register",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "Email": email.value,
+                "Password": password.value,
+                "ConfirmPassword": confirmPassword.value
+            }),
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    }
+    //function registerUser() {
+    //    var $items = $('#email, #password,#confirmPassword')
+    //    var obj = {}
+    //    $items.each(function () {
+    //        obj[this.id] = $(this).val()
+    //    })
+
+    //    $.post("ApiTreinoUrlPlaceHolder" + cep.value + "/json/?callback=?", function (printa) {
+
+    //        console.log(printa);
+    //    });
+
+    //}
+
+</script>
+
+<h2>Register</h2>
+
+@using (Html.BeginForm())
+{
+<div class="form-horizontal">
+    <h4>Address</h4>
+    <hr />
+    <div class="form-group">
+        <label class="control-label col-md-2" for="addressId">Email: </label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="email" name="email" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="addressId">Senha: </label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="password" name="password" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="addressId">Confirme sua senha: </label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="confirmPassword" name="confirmPassword" type="text" value="">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" class="btn btn-default" onclick="registerUser()" value="Sign Up" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

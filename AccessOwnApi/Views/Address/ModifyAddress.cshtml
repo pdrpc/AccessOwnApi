@@ -1,0 +1,158 @@
+﻿@model AccessOwnApi.Models.Address
+
+@{
+    ViewBag.Title = "ModifyAddress";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function modifyAddress() {
+        var addressId = document.getElementById("addressId")
+        var cep = document.getElementById("cep");
+        var logradouro = document.getElementById("logradouro");
+        var complemento = document.getElementById("complemento");
+        var bairro = document.getElementById("bairro");
+        var localidade = document.getElementById("localidade");
+        var uf = document.getElementById("uf");
+        var ibge = document.getElementById("ibge");
+        var gia = document.getElementById("gia");
+        var ddd = document.getElementById("ddd");
+        var siafi = document.getElementById("siafi");
+
+        var settings = {
+            "url": "https://localhost:44318/Api/Address/" + addressId,
+            "method": "PUT",
+            "timeout": 0,
+            "headers": {
+                "Authorization": "Bearer" + localStorage.getItem('access_token'),
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "data": {
+                "AddressId": addressId.value,
+                "Cep": cep.value,
+                "Logradouro": logradouro.value,
+                "Complemento": complemento.value,
+                "Bairro": bairro.value,
+                "Localidade": localidade.value,
+                "Uf": uf.value,
+                "Ibge": ibge.value,
+                "Gia": gia.value,
+                "Ddd": ddd.value,
+                "Siafi": siafi.value
+            }
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    }
+</script>
+<h2>ModifyAddress</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Address</h4>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="addressId">AddressId</label>
+            <div class="col-md-10"> 
+            <input class="form-control text-box single-line" id="addressId" name="addressId" type="text" value="">
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cep, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control", @id = "cep" } })
+                @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Logradouro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Logradouro, new { htmlAttributes = new { @class = "form-control", @id = "logradouro" } })
+                @Html.ValidationMessageFor(model => model.Logradouro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Complemento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control", @id = "complemento" } })
+                @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control", @id = "bairro" } })
+                @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Localidade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Localidade, new { htmlAttributes = new { @class = "form-control", @id = "localidade" } })
+                @Html.ValidationMessageFor(model => model.Localidade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Uf, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Uf, new { htmlAttributes = new { @class = "form-control", @id = "uf" } })
+                @Html.ValidationMessageFor(model => model.Uf, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ibge, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ibge, new { htmlAttributes = new { @class = "form-control", @id = "ibge" } })
+                @Html.ValidationMessageFor(model => model.Ibge, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control", @id = "gia" } })
+                @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ddd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ddd, new { htmlAttributes = new { @class = "form-control", @id = "ddd" } })
+                @Html.ValidationMessageFor(model => model.Ddd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Siafi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Siafi, new { htmlAttributes = new { @class = "form-control", @id = "siafi" } })
+                @Html.ValidationMessageFor(model => model.Siafi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" onclick="modifyAddress()"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

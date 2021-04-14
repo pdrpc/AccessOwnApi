@@ -1,0 +1,55 @@
+﻿@model AccessOwnApi.Models.Address
+
+@{
+    ViewBag.Title = "DeleteAddress";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+
+    function deleteAddress() {
+        var addressId = document.getElementById("addressId");
+        var form = new FormData();
+        var settings = {
+            "url": "https://localhost:44318/Api/Address/" + addressId.value,
+            "method": "DELETE",
+            "timeout": 0,
+            "headers": {
+                "Authorization": "Bearer " + localStorage.getItem('access_token')
+            },
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": form
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    }
+</script>
+<h2>DeleteAddress</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Address</h4>
+    <hr />
+    <div class="form-group">
+        <label class="control-label col-md-2" for="addressId">AddressId</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="addressId" name="addressId" type="text" value="">
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" onclick="deleteAddress()" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
