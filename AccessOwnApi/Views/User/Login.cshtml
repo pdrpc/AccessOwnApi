@@ -26,6 +26,7 @@
         $.ajax(settings).done(function (response) {
             console.log(response.access_token);
             localStorage.setItem('access_token', response.access_token);
+            localStorage.setItem('user_name', response.username);
         });
         
     }

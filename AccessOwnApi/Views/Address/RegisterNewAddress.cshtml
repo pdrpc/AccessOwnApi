@@ -9,21 +9,20 @@
 <script type="text/javascript">
     function redirectCep() {
         var cep = document.getElementById("cep");
-        var access_token = localStorage.getItem('access_token');
         var settings = {
             "url": "https://localhost:44318/Api/Address?cep=" + cep.value,
             "method": "POST",
             "timeout": 0,
             "headers": {
-                "Authorization": "Bearer "+ access_token
+                "Authorization": "Bearer " + localStorage.getItem('access_token')
             },
         };
-        console.log(access_token);
+        console.log(localStorage.getItem('access_token'));
 
         $.ajax(settings).done(function (response) {
             console.log(response);
         });
-        
+
     }
 
 </script>
@@ -33,17 +32,20 @@
 {
     @Html.AntiForgeryToken()
 
+
+    <h4>Address</h4>
     <div class="form-horizontal">
-        <h4>Address</h4>
         <br />
-        <label>Cep:
-        <br />
-            <input type="text" name="cep" id="cep" value="" size="10" maxlength="9" />
-        </label>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="cep">Cep</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="cep" name="cep" type="text" value="">
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" placeholder="Enviar!" class="btn btn-default" onclick="redirectCep()" />
+                <input type="button" value="Enviar!" class="btn btn-default" onclick="redirectCep()" />
             </div>
         </div>
     </div>

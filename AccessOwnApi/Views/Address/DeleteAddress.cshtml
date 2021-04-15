@@ -6,7 +6,40 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#addressId").blur(function () {
+            var form = new FormData();
+            var addressId = document.getElementById("addressId").value;
+            var settings = {
+                "url": "https://localhost:44318/Api/Address/" + addressId.value,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer " + localStorage.getItem('access_token')
+                },
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": form
+            }
+            console.log(addressId)
 
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                $("#cep").val(dados.cep);
+                $("#logradouro").val(dados.logradouro);
+                $("#complemento").val(dados.complemento);
+                $("#bairro").val(dados.bairro);
+                $("#localidade").val(dados.localidade);
+                $("#uf").val(dados.uf);
+                $("#ibge").val(dados.ibge);
+                $("#gia").val(dados.gia);
+                $("#ddd").val(dados.ddd);
+                $("#siafi").val(dados.siafi);
+
+            });
+        });
+    });
 
 
     function deleteAddress() {
@@ -34,22 +67,94 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Address</h4>
-    <hr />
-    <div class="form-group">
-        <label class="control-label col-md-2" for="addressId">AddressId</label>
-        <div class="col-md-10">
-            <input class="form-control text-box single-line" id="addressId" name="addressId" type="text" value="">
-        </div>
-    </div>
-
     @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken() 
+        <h4>Address</h4>
+        <hr />
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-md-2" for="addressId">AddressId</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="addressId" name="addressId" type="text" value="">
+                </div>
+            </div>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" onclick="deleteAddress()" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <div class="form-group">
+                <label class="control-label col-md-2" for="cep">Cep</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="cep" name="cep" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="logradouro">Rua</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="logradouro" name="logradouro" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="complemento">Complemento</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="complemento" name="complemento" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="bairro">Bairro</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="bairro" name="bairro" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="localidade">Cidade</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="localidade" name="localidade" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="uf">UF</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="uf" name="uf" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="ibge">IBGE</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="ibge" name="ibge" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="gia">GIA</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="gia" name="gia" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="ddd">DDD</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="ddd" name="ddd" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="siafi">Siafi</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="siafi" name="siafi" type="text" value="">
+                </div>
+            </div>
+
+
+            <div class="form-actions no-color">
+                <input type="button" value="Delete" class="btn btn-default" onclick="deleteAddress()" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
         </div>
     }
 </div>

@@ -24,5 +24,19 @@ namespace AccessOwnApi.Controllers
             return View();
         }
 
+        public ActionResult LogOut()
+        {
+            return View();
+        }
+
+        public ActionResult RemoveLogin() 
+        {
+            return View();
+        }
+
+        public ActionResult ChangePassword()
+        { 
+            return View();
+        }
     }
 }
