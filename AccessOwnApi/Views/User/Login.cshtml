@@ -12,7 +12,7 @@
         var settings = {
             "url": "https://localhost:44318/Token",
             "method": "POST",
-            "timeout": 0,
+            "dataType": "json",
             "headers": {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
@@ -22,11 +22,12 @@
                 "password": password.value
             }
         };
+        console.log(email.value, password.value);
 
         $.ajax(settings).done(function (response) {
             console.log(response.access_token);
             localStorage.setItem('access_token', response.access_token);
-            localStorage.setItem('user_name', response.username);
+            localStorage.setItem('user_name', response.userName);
         });
         
     }

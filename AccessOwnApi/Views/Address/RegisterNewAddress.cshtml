@@ -12,9 +12,9 @@
         var settings = {
             "url": "https://localhost:44318/Api/Address?cep=" + cep.value,
             "method": "POST",
-            "timeout": 0,
+            "dataType": 'json',
             "headers": {
-                "Authorization": "Bearer " + localStorage.getItem('access_token')
+                "Authorization": "Bearer AXuqf9B8yNJ43WNerDOROwq0QXT2-kQp-DibJQdH8RlUpG35cnoRLwRlihiLXGlY5QxWD42wZfWRC4ggUPNqCo1dYXWDa9EeX_Efnng56ATa1wf4PrC1SDWMaVOZwpbGPvHN6kDRT0bd1IkNWjWLCJWEIZN7iCe-7OCaa0n2yylzmHoXCYdNh3sOpMIwgxz-uAsPhTZFdddfBMuAEZJSCb7A3QMkvN9asdWtSgPeLTCfrBF6bKaEf3yQ_QgFUPFrysU8ZNNscNEzQUBwxjdrPX12PpcArukqurwG192LhSZ4IL8CllAicjsLiL_e74gXBv9iMFXg_nf61sL3eR4NYoQgxWJItf-XV4lXKsOR8WVP9WT-XMc6U6w-kKrzZprJ7edYXXW6MkLikhGimqnP-h8u4R9EMSv6WjAbte2Z5nNcb4UOyVsp1pTVkFCMsKtK07GYL5N3ruVn0Du-wZKnFUgPRFGU4KhLmdWhdff4-yQ" /*+ localStorage.getItem('access_token')*/
             },
         };
         console.log(localStorage.getItem('access_token'));
