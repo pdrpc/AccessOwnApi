@@ -28,7 +28,10 @@
             console.log(response.access_token);
             localStorage.setItem('access_token', response.access_token);
             localStorage.setItem('user_name', response.userName);
+            window.location.href = "/Address"
         });
+
+        
         
     }
 </script>

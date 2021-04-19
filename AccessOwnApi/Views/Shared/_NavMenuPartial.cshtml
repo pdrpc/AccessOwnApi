@@ -1,7 +1,25 @@
-﻿
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var address = document.getElementById("address");
+        var user = document.getElementById("user");
+        if (localStorage.getItem('access_token') != null && localStorage.getItem('user_name') != null) {
+            user.style.display = "none";
+
+        } else {
+            address.style.display = "none";
+
+        }
+    });
+</script>
 @{
     ViewBag.Title = "_NavMenuPartial";
 }
 
-<h2>_NavMenuPartial</h2>
 
+<ul class="nav navbar-nav">
+    <li id="address">@Html.ActionLink("Início", "Index", "Address")</li>
+    <li id="user">@Html.ActionLink("Início", "Index", "Home")</li>
+    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+</ul>

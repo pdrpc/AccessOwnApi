@@ -1,22 +1,33 @@
-﻿
-@if (/*localStorage.getItem('access_token') != null && localStorage.getItem('user_name') != null */)
-{
-    using (Html.BeginForm("LogOut", "User", new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var ul_Nlogged = document.getElementById("ul_Nlogged");
+        var ul_logged = document.getElementById("ul_logged");
+        if (localStorage.getItem('access_token') != null && localStorage.getItem('user_name') != null) {
+            ul_Nlogged.style.display = "none";
+            link.append(` ${localStorage.getItem('user_name')}`)
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Olá " + /*localStorage.getItem('user_name')*/ "!", "Index", "Manage", htmlAttributes: new { title = "Manage" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Fazer logoff</a></li>
-        </ul>
+        } else {
+            ul_logged.style.display = "none";
+            
+        }
+    });
+    function purgeLocalStorage() {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('user_name');
     }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registrar", "Register", "User", htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Logon", "Login", "User", htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+
+</script>
+
+
+<ul class="nav navbar-nav navbar-right" id="ul_logged">
+    <li >
+        @Html.ActionLink("Olá", "ChangePassword", "User", routeValues: null, htmlAttributes: new { id="link"})
+    </li>
+    <li><a href="/" onclick="purgeLocalStorage()">Fazer logoff</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right" id="ul_Nlogged">
+    <li>@Html.ActionLink("Registrar", "Register", "User")</li>
+    <li>@Html.ActionLink("Logon", "Login", "User")</li>
+</ul>
+

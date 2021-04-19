@@ -29,6 +29,8 @@
         $.ajax(settings).done(function (response) {
             console.log(response);
         });
+
+        window.location.href = "/User/Login";
     }
 
 </script>
@@ -68,5 +70,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "Home")
 </div>
