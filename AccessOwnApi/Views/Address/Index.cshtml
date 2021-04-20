@@ -38,8 +38,8 @@
                             <td>${obj[i].gia}</td>
                             <td>${obj[i].ddd}</td>
                             <td>${obj[i].siafi}</td>
-                            <td> <a href="Address/ModifyAddress?addressId=${obj[i].AddressId}">Editar</a></td>
-                            <td> <a href="Address/DeleteAddress?addressId=${obj[i].AddressId}">Deletar</a></td>
+                            <td> <a href="/Address/ModifyAddress?addressId=${obj[i].AddressId}">Editar</a></td>
+                            <td> <a href="/Address/DeleteAddress?addressId=${obj[i].AddressId}">Deletar</a></td>
                         </tr>`
             table_row.innerHTML += row
         }
