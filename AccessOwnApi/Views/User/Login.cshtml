@@ -4,38 +4,9 @@
 }
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-
-<h2>Login</h2>
-<form method="post" action="https://localhost:44318/Token">
-    <div class="form-horizontal">
-        <h4>Address</h4>
-        <hr />
-        <div class="form-group">
-            <label class="control-label col-md-2" for="email">Email: </label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" id="username" name="username" type="text" value="">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2" for="senha">Senha: </label>
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" id="password" name="password" type="text" value="">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Login" />
-            </div>
-        </div>
-        <input type="hidden" name="grant_type" value="password" />
-    </div>
-</form>
 <script type="text/javascript">
     function loginUser() {
-        var email = document.getElementById("email");
+        var username = document.getElementById("username");
         var password = document.getElementById("password");
         var settings = {
             "url": "https://localhost:44318/Token",
@@ -46,11 +17,11 @@
             },
             "data": {
                 "grant_type": "password",
-                "username": email.value,
+                "username": username.value,
                 "password": password.value
             }
         };
-        console.log(email.value, password.value);
+        console.log(username.value, password.value);
 
         $.ajax(settings).done(function (response) {
             console.log(response.access_token);
@@ -63,25 +34,51 @@
 
     }
 
-    $('body').on('submit', 'form', function (e) {
-        e.preventDefault();
-        var formData = new FormData(this);
-        var form = $(this);
-        console.log(formData);
-        
-        $.ajax({
-            url: form.attr('action'),
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (data) {
-                console.log(data)
-            },
-            error: function (e) {
-                console.error(e);
-            }
-        });
-    });
+    //$('body').on('submit', 'form', function (e) {
+    //    e.preventDefault();
+    //    var formData = new FormData(this);
+    //    var form = $(this);
+    //    console.log(formData);
+
+    //    $.ajax({
+    //        url: form.attr('action'),
+    //        type: 'POST',
+    //        data: formData,
+    //        contentType: false,
+    //        cache: false,
+    //        processData: false,
+    //        success: function (data) {
+    //            console.log(data)
+    //        },
+    //        error: function (e) {
+    //            console.error(e);
+    //        }
+    //    });
+    //});
 </script>
+
+
+<h2>Login</h2>
+<div class="form-horizontal">
+    <h4>Address</h4>
+    <hr />
+    <div class="form-group">
+        <label class="control-label col-md-2" for="username">Email: </label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="username" name="username" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="senha">Senha: </label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="password" name="password" type="text" value="">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" class="btn btn-default" onclick="loginUser()" value="Login" />
+        </div>
+    </div>
+</div>
+
